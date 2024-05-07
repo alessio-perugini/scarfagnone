@@ -70,6 +70,7 @@ apt.deb(
 apt.update(
     name="Update apt repositories",
     cache_time=3600,
+    _sudo=True,
 )
 
 apt.packages(
