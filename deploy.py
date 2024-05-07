@@ -48,7 +48,7 @@ def setup_common():
     if context.host.get_fact(Which, "rustup") is None:
         server.shell(
             name="Install rust",
-            commands=["curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"],
+            commands=["curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y"],
         )
 
     if context.host.get_fact(Which, "docker") is None:
