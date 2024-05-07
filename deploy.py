@@ -78,6 +78,7 @@ def setup_common():
 
 def setup_asdf():
     apps = [
+        "age",
         "awscli",
         "dive",
         "editorconfig-checker",
