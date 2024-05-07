@@ -31,6 +31,12 @@ def setup_common():
         branch="v0.14.0",
     )
 
+    # This is needed otherwise the next step won't see asdf binary
+    server.shell(
+        name="Export asdf to PATH",
+        commands=["export PATH=$PATH:/home/ale/.asdf/bin:/home/ale/.asdf/shims"],
+    )
+
     git.repo(
         name="Clone tpm",
         pull=False,
