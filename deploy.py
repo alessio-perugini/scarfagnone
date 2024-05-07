@@ -31,12 +31,6 @@ def setup_common():
         branch="v0.14.0",
     )
 
-    # This is needed otherwise the next step won't see asdf binary
-    server.shell(
-        name="Export asdf to PATH",
-        commands=["export PATH=$PATH:/home/ale/.asdf/bin:/home/ale/.asdf/shims"],
-    )
-
     git.repo(
         name="Clone tpm",
         pull=False,
@@ -116,6 +110,7 @@ def setup_asdf():
                 f"asdf install {app} latest",
                 f"asdf global {app} latest",
             ],
+            _env={"PATH": "$PATH:$HOME/.asdf/bin:$HOME/.asdf/shims"},
         )
 
 
@@ -129,7 +124,8 @@ def setup_cargo():
         if context.host.get_fact(Which, app) is None:
             server.shell(
                 name=f"Install cargo {app}",
-                commands=[f"/home/ale/.cargo/bin/cargo-binstall -y {app}"],
+                commands=[f"cargo-binstall -y {app}"],
+                _env={"PATH": "$PATH:$HOME/.cargo/bin"},
             )
 
 
@@ -157,6 +153,10 @@ def setup_go_install():
             "go install google.golang.org/protobuf/cmd/protoc-gen-go@latest",
             "go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest",
         ],
+        _env={
+            "GOPATH": "$HOME/go",
+            "PATH":   "$PATH:$HOME/.asdf/shims",
+        },
     )
 
 
