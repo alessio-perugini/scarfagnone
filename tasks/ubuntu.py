@@ -67,6 +67,11 @@ apt.deb(
     _sudo=True,
 )
 
+apt.update(
+    name="Update apt repositories",
+    cache_time=3600,
+)
+
 apt.packages(
     name="Install packages",
     packages=[
