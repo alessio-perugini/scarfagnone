@@ -42,7 +42,7 @@ def setup_common():
         server.shell(
             name="Install kitty",
             commands=[
-                "curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin"
+                "curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n"
             ],
         )
     if context.host.get_fact(Which, "rustup") is None:
