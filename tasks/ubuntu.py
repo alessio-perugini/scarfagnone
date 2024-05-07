@@ -58,7 +58,8 @@ files.download(
 )
 server.shell(
     name="Extract eset deb",
-    commands=["/tmp/eeau_x86_64.bin --accept-license --no-install"],
+    commands=["eeau_x86_64.bin --accept-license --no-install"],
+    _chdir="/tmp",
 )
 apt.deb(
     name="Install eset",
