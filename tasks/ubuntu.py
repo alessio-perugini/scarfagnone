@@ -73,6 +73,7 @@ apt.packages(
         "libnss3-tools",
         "clangd",
         "clang-format",
+        "bzip2",
         "cmake",
         "make",
         "ffmpeg",
