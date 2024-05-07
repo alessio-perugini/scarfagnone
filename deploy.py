@@ -80,6 +80,7 @@ def setup_asdf():
     apps = [
         "age",
         "awscli",
+        "chezmoi",
         "dive",
         "editorconfig-checker",
         "fx",
