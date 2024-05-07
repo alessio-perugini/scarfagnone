@@ -31,6 +31,13 @@ def setup_common():
         branch="v0.14.0",
     )
 
+    git.repo(
+        name="Clone tpm",
+        pull=False,
+        src="https://github.com/tmux-plugins/tpm",
+        dest="/home/ale/.tmux/plugins/tpm",
+    )
+
     if context.host.get_fact(Which, "kitty") is None:
         server.shell(
             name="Install kitty",
