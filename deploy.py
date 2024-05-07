@@ -129,7 +129,7 @@ def setup_cargo():
         if context.host.get_fact(Which, app) is None:
             server.shell(
                 name=f"Install cargo {app}",
-                commands=[f"cargo binstall -y {app}"],
+                commands=[f"/home/ale/.cargo/bin/cargo-binstall -y {app}"],
             )
 
 
