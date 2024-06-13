@@ -63,7 +63,7 @@ server.shell(
 )
 apt.deb(
     name="Install eset",
-    src="/tmp/eea-10.2.2.0-ubuntu18.x86_64.deb",
+    src="/tmp/eea-10.3.4.0-ubuntu18.x86_64.deb",
     present=True,
     _sudo=True,
 )
