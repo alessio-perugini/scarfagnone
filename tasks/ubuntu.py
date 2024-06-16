@@ -35,6 +35,7 @@ for item in dict:
         _sudo=True,
     )
 
+# brave
 files.download(
     name="Download brave key",
     src="https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg",
@@ -48,6 +49,8 @@ apt.repo(
     filename="brave-browser-release",
     _sudo=True,
 )
+
+# pritunl
 apt.repo(
     name="Install pritunl",
     src="deb https://repo.pritunl.com/stable/apt noble main",
@@ -59,6 +62,19 @@ apt.key(
     name="Add the pritunl apt gpg key",
     keyserver="hkp://keyserver.ubuntu.com",
     keyid="7568D9BB55FF9E5287D586017AE645C0CF8E292A",
+)
+
+# mise
+apt.key(
+    name="Add the mise apt gpg key",
+    src="https://mise.jdx.dev/gpg-key.pub",
+)
+apt.repo(
+    name="Install mise",
+    src="deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=amd64] https://mise.jdx.dev/deb stable main",
+    present=True,
+    filename="mise",
+    _sudo=True,
 )
 
 # ESET
@@ -107,6 +123,7 @@ apt.packages(
         "jq",
         "libnss3-tools",
         "make",
+        "mise",
         "pritunl-client-electron",
         "ruby-licensee",
         "shellcheck",

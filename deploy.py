@@ -24,14 +24,6 @@ def setup_common():
     )
 
     git.repo(
-        name="Clone asdf",
-        pull=False,
-        src="https://github.com/asdf-vm/asdf.git",
-        dest="/home/ale/.asdf",
-        branch="v0.14.0",
-    )
-
-    git.repo(
         name="Clone tpm",
         pull=False,
         src="https://github.com/tmux-plugins/tpm",
@@ -44,11 +36,6 @@ def setup_common():
             commands=[
                 "curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n dest=/home/ale/.local/bin"
             ],
-        )
-    if context.host.get_fact(Which, "rustup") is None:
-        server.shell(
-            name="Install rust",
-            commands=["curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y"],
         )
 
     if context.host.get_fact(Which, "docker") is None:
@@ -64,69 +51,6 @@ def setup_common():
             ],
             _sudo=True,
         )
-
-    # Probably to use Cargo operations index
-    status, _, _ = context.host.run_shell_command("cargo binstall --help")
-    if not status:
-        server.shell(
-            name="Install cargo-binstall",
-            commands=[
-                "curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash"
-            ],
-        )
-
-
-def setup_asdf():
-    apps = [
-        "age",
-        "awscli",
-        "chezmoi",
-        "dive",
-        "editorconfig-checker",
-        "fx",
-        "github-cli",
-        "golang",
-        "golangci-lint",
-        "helm",
-        "k6",
-        "k9s",
-        "kind",
-        "kubeconform",
-        "kubectl",
-        "kubectx",
-        "minikube",
-        "mkcert",
-        "nodejs",
-        "task",
-        "terraform",
-        "yq",
-    ]
-
-    for app in apps:
-        server.shell(
-            name=f"Install asdf {app}",
-            commands=[
-                f"asdf plugin-add {app}",
-                f"asdf install {app} latest",
-                f"asdf global {app} latest",
-            ],
-            _env={"PATH": "$PATH:$HOME/.asdf/bin:$HOME/.asdf/shims"},
-        )
-
-
-def setup_cargo():
-    apps = [
-        "ripgrep",
-        "eza",
-        "fd-find",
-    ]
-    for app in apps:
-        if context.host.get_fact(Which, app) is None:
-            server.shell(
-                name=f"Install cargo {app}",
-                commands=[f"cargo-binstall -y {app}"],
-                _env={"PATH": "$PATH:$HOME/.cargo/bin"},
-            )
 
 
 def setup_go_install():
@@ -155,7 +79,7 @@ def setup_go_install():
         ],
         _env={
             "GOPATH": "$HOME/go",
-            "PATH":   "$PATH:$HOME/.asdf/shims",
+            "PATH": "$PATH:$HOME/.asdf/shims",
         },
     )
 
@@ -166,6 +90,4 @@ elif context.host.get_fact(LinuxName) == "Ubuntu":
     local.include("tasks/ubuntu.py")
 
 setup_common()
-setup_asdf()
-setup_cargo()
 setup_go_install()
