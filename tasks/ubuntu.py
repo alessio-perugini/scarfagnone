@@ -1,5 +1,4 @@
 from pyinfra.operations import apt, files, server
-from pyinfra.operations.dnf import packages
 
 dict = [
     {
@@ -66,7 +65,7 @@ apt.packages(
     _sudo=True,
 )
 server.shell(
-    name="Extract eset deb",
+    name="Install pritunl gpg key",
     commands=[
         "gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys 7568D9BB55FF9E5287D586017AE645C0CF8E292A",
         "gpg --armor --export 7568D9BB55FF9E5287D586017AE645C0CF8E292A | sudo tee /etc/apt/trusted.gpg.d/pritunl.asc",
@@ -98,8 +97,8 @@ files.download(
     mode="755",
 )
 server.shell(
-    name="Extract eset deb",
-    commands=["/tmp/eeau_x86_64.bin --accept-license"],
+    name="Install eset",
+    commands=["/tmp/eeau_x86_64.bin --accept-license -f"],
     _chdir="/tmp",
     _sudo=True,
 )
