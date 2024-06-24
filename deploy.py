@@ -65,6 +65,13 @@ def setup_common():
         )
 
 
+    server.shell(
+        name="Default shell to zsh",
+        commands=[
+            "chsh -s $(which zsh) ale",
+        ],
+        _sudo=True,
+    )
 if context.host.get_fact(LinuxName) == "Fedora":
     local.include("tasks/fedora.py")
 elif context.host.get_fact(LinuxName) == "Ubuntu":
