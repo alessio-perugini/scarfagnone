@@ -1,4 +1,5 @@
 from pyinfra.operations import apt, files, server
+from pyinfra.operations.dnf import packages
 
 dict = [
     {
@@ -58,16 +59,28 @@ apt.repo(
     filename="pritunl",
     _sudo=True,
 )
-apt.key(
-    name="Add the pritunl apt gpg key",
-    keyserver="hkp://keyserver.ubuntu.com",
-    keyid="7568D9BB55FF9E5287D586017AE645C0CF8E292A",
+apt.packages(
+    name="Install gnupg",
+    packages=["gnupg"],
+    present=True,
+    _sudo=True,
+)
+server.shell(
+    name="Extract eset deb",
+    commands=[
+        "gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys 7568D9BB55FF9E5287D586017AE645C0CF8E292A",
+        "gpg --armor --export 7568D9BB55FF9E5287D586017AE645C0CF8E292A | sudo tee /etc/apt/trusted.gpg.d/pritunl.asc",
+    ],
+    _sudo=True,
 )
 
 # mise
-apt.key(
-    name="Add the mise apt gpg key",
-    src="https://mise.jdx.dev/gpg-key.pub",
+server.shell(
+    name="Download mise key",
+    commands=[
+        "wget -qO - https://mise.jdx.dev/gpg-key.pub | gpg --dearmor | sudo tee /etc/apt/keyrings/mise-archive-keyring.gpg 1> /dev/null",
+    ],
+    _sudo=True,
 )
 apt.repo(
     name="Install mise",

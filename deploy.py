@@ -44,7 +44,7 @@ def setup_common():
             commands=[
                 "curl -fsSL https://get.docker.com -o /tmp/get-docker.sh",
                 "sh /tmp/get-docker.sh",
-                "groupadd docker",
+                "groupadd docker || true",
                 "usermod -aG docker ale",
                 "systemctl enable docker.service",
                 "systemctl enable containerd.service",
