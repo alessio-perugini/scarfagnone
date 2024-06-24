@@ -53,41 +53,9 @@ def setup_common():
         )
 
 
-def setup_go_install():
-    server.shell(
-        name="Install go applications",
-        commands=[
-            "go install github.com/google/addlicense@latest",
-            "go install github.com/itchyny/bed/cmd/bed@latest",
-            "go install golang.org/x/perf/cmd/benchstat@latest",
-            "go install github.com/bufbuild/buf/cmd/buf@latest",
-            "go install github.com/KyleBanks/depth/cmd/depth@latest",
-            "go install github.com/go-delve/delve/cmd/dlv@latest",
-            "go install github.com/mailru/easyjson/easyjson@latest",
-            "go install 4d63.com/embedfiles@latest",
-            "go install goa.design/goa/v3/cmd/goa@v3",
-            "go install github.com/loov/goda@latest",
-            "go install github.com/kisielk/godepgraph@latest",
-            "go install golang.org/x/lint/golint@latest",
-            "go install golang.org/x/vuln/cmd/govulncheck@latest",
-            "go install github.com/nao1215/gup@latest",
-            "go install github.com/bufbuild/buf/cmd/protoc-gen-buf-breaking@latest",
-            "go install github.com/bufbuild/buf/cmd/protoc-gen-buf-lint@latest",
-            "go install github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@latest",
-            "go install google.golang.org/protobuf/cmd/protoc-gen-go@latest",
-            "go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest",
-        ],
-        _env={
-            "GOPATH": "$HOME/go",
-            "PATH": "$PATH:$HOME/.asdf/shims",
-        },
-    )
-
-
 if context.host.get_fact(LinuxName) == "Fedora":
     local.include("tasks/fedora.py")
 elif context.host.get_fact(LinuxName) == "Ubuntu":
     local.include("tasks/ubuntu.py")
 
 setup_common()
-setup_go_install()
