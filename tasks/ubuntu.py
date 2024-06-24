@@ -86,13 +86,8 @@ files.download(
 )
 server.shell(
     name="Extract eset deb",
-    commands=["/tmp/eeau_x86_64.bin --accept-license --no-install"],
+    commands=["/tmp/eeau_x86_64.bin --accept-license"],
     _chdir="/tmp",
-)
-apt.deb(
-    name="Install eset",
-    src="/tmp/eea-10.3.4.0-ubuntu18.x86_64.deb",
-    present=True,
     _sudo=True,
 )
 
