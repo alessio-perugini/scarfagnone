@@ -141,6 +141,7 @@ apt.packages(
         "zsh",
         "python3-pip",
         "python3.12-venv",
+        "wl-clipboard",
     ],
     present=True,
     _sudo=True,
