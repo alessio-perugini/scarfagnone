@@ -60,10 +60,11 @@ def setup_common():
                 "usermod -aG docker ale",
                 "systemctl enable docker.service",
                 "systemctl enable containerd.service",
+                "curl -fsSL https://github.com/docker/docker-credential-helpers/releases/download/v0.8.2/docker-credential-secretservice-v0.8.2.linux-amd64 -o /us/local/bin/docker-credential-secretservice",
+                "chmod +x /usr/local/bin/docker-credential-secretservice",
             ],
             _sudo=True,
         )
-
 
     server.shell(
         name="Default shell to zsh",
@@ -72,6 +73,8 @@ def setup_common():
         ],
         _sudo=True,
     )
+
+
 if context.host.get_fact(LinuxName) == "Fedora":
     local.include("tasks/fedora.py")
 elif context.host.get_fact(LinuxName) == "Ubuntu":
