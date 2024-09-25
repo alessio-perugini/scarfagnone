@@ -74,6 +74,15 @@ def setup_common():
         _sudo=True,
     )
 
+    server.shell(
+        name="Fix too many open files",
+        commands=[
+            "echo fs.file-max = 1000000 >> /etc/sysctl.conf",
+            "echo fs.inotify.max_user_watches=1000000 = 1000000 >> /etc/sysctl.conf",
+        ],
+        _sudo=True,
+    )
+
 
 if context.host.get_fact(LinuxName) == "Fedora":
     local.include("tasks/fedora.py")
