@@ -89,6 +89,22 @@ apt.repo(
     _sudo=True,
 )
 
+# MSD
+files.download(
+    name="Download microsoft defender",
+    src="https://raw.githubusercontent.com/microsoft/mdatp-xplat/refs/heads/master/linux/installation/mde_installer.sh",
+    dest="/tmp",
+)
+server.shell(
+    name="Download mise key",
+    commands=[
+        "chmod +x ./mde_installer.sh",
+        "./mde_installer.sh -i -y",
+        "mdatp config real-time-protection --value enabled",
+        "mdatp config cloud-automatic-sample-submission --value disabled",
+    ],
+    _sudo=True,
+)
 # ESET
 # files.download(
 #     name="Download eset",
