@@ -60,7 +60,6 @@ dnf.packages(
         "htop",
         "keybase",
         "mise",
-        "neovim",
         "nss-tools",
         "rofimoji",
         "tmux",
