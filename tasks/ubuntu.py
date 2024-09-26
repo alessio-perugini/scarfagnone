@@ -140,7 +140,6 @@ apt.packages(
         "git",
         "graphviz",
         "hexdiff",
-        "hexyl",
         "htop",
         "jc",
         "jq",

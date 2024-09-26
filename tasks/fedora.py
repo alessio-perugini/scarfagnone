@@ -56,7 +56,6 @@ dnf.packages(
         "flameshot",
         "git",
         "graphviz",
-        "hexyl",
         "htop",
         "keybase",
         "mise",
