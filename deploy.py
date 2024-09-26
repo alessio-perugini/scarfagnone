@@ -56,8 +56,9 @@ def setup_common():
             commands=[
                 "curl -fsSL https://get.docker.com -o /tmp/get-docker.sh",
                 "sh /tmp/get-docker.sh",
-                "groupadd docker || true",
+                "groupadd docker",
                 "usermod -aG docker ale",
+                "newgrp docker",
                 "systemctl enable docker.service",
                 "systemctl enable containerd.service",
                 "curl -fsSL https://github.com/docker/docker-credential-helpers/releases/download/v0.8.2/docker-credential-secretservice-v0.8.2.linux-amd64 -o /us/local/bin/docker-credential-secretservice",
