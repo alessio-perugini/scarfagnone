@@ -83,6 +83,19 @@ def setup_common():
         _sudo=True,
     )
 
+    # server.shell(
+    #     name="Init chezmoi configs",
+    #     commands=[
+    #         'sh -c "$(curl -fsLS get.chezmoi.io)" -- init alessio-perugini --ssh --apply'
+    #     ],
+    # )
+    #
+    # server.shell(
+    #     name="Install mise tools",
+    #     commands=["mise install"],
+    # )
+    #
+
 
 if context.host.get_fact(LinuxName) == "Fedora":
     local.include("tasks/fedora.py")
