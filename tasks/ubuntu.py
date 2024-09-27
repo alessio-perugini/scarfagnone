@@ -157,6 +157,7 @@ apt.packages(
         "python3-pip",
         "python3.12-venv",
         "wl-clipboard",
+        "parallel",
     ],
     present=True,
     _sudo=True,
