@@ -105,19 +105,6 @@ server.shell(
     ],
     _sudo=True,
 )
-# ESET
-# files.download(
-#     name="Download eset",
-#     src="https://download.eset.com/com/eset/apps/business/eea/linux/g2/latest/eeau_x86_64.bin",
-#     dest="/tmp/eeau_x86_64.bin",
-#     mode="755",
-# )
-# server.shell(
-#     name="Install eset",
-#     commands=["/tmp/eeau_x86_64.bin --accept-license -f"],
-#     _chdir="/tmp",
-#     _sudo=True,
-# )
 
 apt.update(
     name="Update apt repositories",
