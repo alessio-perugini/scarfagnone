@@ -58,7 +58,6 @@ def setup_common():
                 "sh /tmp/get-docker.sh",
                 "groupadd docker",
                 "usermod -aG docker ale",
-                "newgrp docker",
                 "systemctl enable docker.service",
                 "systemctl enable containerd.service",
                 "curl -fsSL https://github.com/docker/docker-credential-helpers/releases/download/v0.8.2/docker-credential-secretservice-v0.8.2.linux-amd64 -o /us/local/bin/docker-credential-secretservice",
@@ -66,6 +65,7 @@ def setup_common():
             ],
             _sudo=True,
         )
+        server.shell(name="Add docker group", commands=["newgrp docker"])
 
     server.shell(
         name="Default shell to zsh",
