@@ -93,13 +93,13 @@ apt.repo(
 files.download(
     name="Download microsoft defender",
     src="https://raw.githubusercontent.com/microsoft/mdatp-xplat/refs/heads/master/linux/installation/mde_installer.sh",
-    dest="/tmp",
+    dest="/tmp/mde_installer.sh",
 )
 server.shell(
     name="Download mise key",
     commands=[
-        "chmod +x ./mde_installer.sh",
-        "./mde_installer.sh -i -y",
+        "chmod +x /tmp/mde_installer.sh",
+        "/tmp/mde_installer.sh -i -y",
         "mdatp config real-time-protection --value enabled",
         "mdatp config cloud-automatic-sample-submission --value disabled",
     ],
