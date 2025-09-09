@@ -2,10 +2,12 @@ from pyinfra import context, local
 from pyinfra.facts.files import Directory
 from pyinfra.facts.server import LinuxName, Which
 from pyinfra.operations import files, git, server
+from pathlib import Path
 
+home = Path.home()
 
 def setup_common():
-    if context.host.get_fact(Directory, path="/home/ale/.oh-my-zsh") is None:
+    if context.host.get_fact(Directory, path=str(home) + "/.oh-my-zsh") is None:
         files.download(
             name="Download oh-my-zsh install script",
             src="https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh",
@@ -20,21 +22,21 @@ def setup_common():
         name="Clone Powerlevel10k",
         pull=False,
         src="https://github.com/romkatv/powerlevel10k.git",
-        dest="/home/ale/.oh-my-zsh/custom/themes/powerlevel10k",
+        dest=str(home)+"/.oh-my-zsh/custom/themes/powerlevel10k",
     )
 
     git.repo(
         name="Clone tpm",
         pull=False,
         src="https://github.com/tmux-plugins/tpm",
-        dest="/home/ale/.tmux/plugins/tpm",
+        dest=str(home)+"/.tmux/plugins/tpm",
     )
 
     if context.host.get_fact(Which, "kitty") is None:
         server.shell(
             name="Install kitty",
             commands=[
-                "curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n dest=/home/ale/.local",
+                "curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n dest="+str(home)+"/.local",
                 # Create symbolic links to add kitty and kitten to PATH (assuming ~/.local/bin is in
                 # your system-wide PATH)
                 "ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten ~/.local/bin/",
@@ -57,10 +59,10 @@ def setup_common():
                 "curl -fsSL https://get.docker.com -o /tmp/get-docker.sh",
                 "sh /tmp/get-docker.sh",
                 "groupadd docker",
-                "usermod -aG docker ale",
+                "usermod -aG docker alessioperugini",
                 "systemctl enable docker.service",
                 "systemctl enable containerd.service",
-                "curl -fsSL https://github.com/docker/docker-credential-helpers/releases/download/v0.8.2/docker-credential-secretservice-v0.8.2.linux-amd64 -o /us/local/bin/docker-credential-secretservice",
+                "curl -fsSL https://github.com/docker/docker-credential-helpers/releases/download/v0.8.2/docker-credential-secretservice-v0.8.2.linux-amd64 -o /usr/local/bin/docker-credential-secretservice",
                 "chmod +x /usr/local/bin/docker-credential-secretservice",
             ],
             _sudo=True,
@@ -70,7 +72,7 @@ def setup_common():
     server.shell(
         name="Default shell to zsh",
         commands=[
-            "chsh -s $(which zsh) ale",
+            "chsh -s $(which zsh) alessioperugini",
         ],
         _sudo=True,
     )

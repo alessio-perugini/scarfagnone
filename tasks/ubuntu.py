@@ -14,16 +14,8 @@ dict = [
         "src": "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64",
     },
     {
-        "name": "keybase",
-        "src": "https://prerelease.keybase.io/keybase_amd64.deb",
-    },
-    {
         "name": "session-manager-plugin",
         "src": "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb",
-    },
-    {
-        "name": "slack",
-        "src": "https://downloads.slack-edge.com/desktop-releases/linux/x64/4.37.101/slack-desktop-4.37.101-amd64.deb",
     },
 ]
 
@@ -51,27 +43,27 @@ apt.repo(
 )
 
 # pritunl
-apt.repo(
-    name="Install pritunl",
-    src="deb https://repo.pritunl.com/stable/apt noble main",
-    present=True,
-    filename="pritunl",
-    _sudo=True,
-)
-apt.packages(
-    name="Install gnupg",
-    packages=["gnupg"],
-    present=True,
-    _sudo=True,
-)
-server.shell(
-    name="Install pritunl gpg key",
-    commands=[
-        "gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys 7568D9BB55FF9E5287D586017AE645C0CF8E292A",
-        "gpg --armor --export 7568D9BB55FF9E5287D586017AE645C0CF8E292A | sudo tee /etc/apt/trusted.gpg.d/pritunl.asc",
-    ],
-    _sudo=True,
-)
+#apt.repo(
+#    name="Install pritunl",
+#    src="deb https://repo.pritunl.com/stable/apt noble main",
+#    present=True,
+#    filename="pritunl",
+#    _sudo=True,
+#)
+#apt.packages(
+#    name="Install gnupg",
+#    packages=["gnupg"],
+#    present=True,
+#    _sudo=True,
+#)
+#server.shell(
+#    name="Install pritunl gpg key",
+#    commands=[
+#        "gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys 7568D9BB55FF9E5287D586017AE645C0CF8E292A",
+#        "gpg --armor --export 7568D9BB55FF9E5287D586017AE645C0CF8E292A | sudo tee /etc/apt/trusted.gpg.d/pritunl.asc",
+#    ],
+#    _sudo=True,
+#)
 
 # mise
 server.shell(
@@ -86,23 +78,6 @@ apt.repo(
     src="deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=amd64] https://mise.jdx.dev/deb stable main",
     present=True,
     filename="mise",
-    _sudo=True,
-)
-
-# MSD
-files.download(
-    name="Download microsoft defender",
-    src="https://raw.githubusercontent.com/microsoft/mdatp-xplat/refs/heads/master/linux/installation/mde_installer.sh",
-    dest="/tmp/mde_installer.sh",
-)
-server.shell(
-    name="Download mise key",
-    commands=[
-        "chmod +x /tmp/mde_installer.sh",
-        "/tmp/mde_installer.sh -i -y",
-        "mdatp config real-time-protection --value enabled",
-        "mdatp config cloud-automatic-sample-submission --value disabled",
-    ],
     _sudo=True,
 )
 
@@ -133,7 +108,7 @@ apt.packages(
         "libnss3-tools",
         "make",
         "mise",
-        "pritunl-client-electron",
+        #"pritunl-client-electron",
         "ruby-licensee",
         "shellcheck",
         "tmux",
@@ -142,7 +117,7 @@ apt.packages(
         "wireshark",
         "zsh",
         "python3-pip",
-        "python3.12-venv",
+        "python3.11-venv",
         "wl-clipboard",
         "parallel",
     ],

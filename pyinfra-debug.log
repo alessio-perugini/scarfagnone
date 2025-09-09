@@ -1,0 +1,26 @@
+  File "/tmp/scarfagnone/.venv/lib/python3.12/site-packages/pyinfra_cli/main.py", line 222, in cli
+    _main(*args, **kwargs)
+  File "/tmp/scarfagnone/.venv/lib/python3.12/site-packages/pyinfra_cli/main.py", line 352, in _main
+    can_diff, state, config = _handle_commands(
+                              ^^^^^^^^^^^^^^^^^
+  File "/tmp/scarfagnone/.venv/lib/python3.12/site-packages/pyinfra_cli/main.py", line 662, in _handle_commands
+    state, config, operations = _prepare_deploy_operations(state, config, operations)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/scarfagnone/.venv/lib/python3.12/site-packages/pyinfra_cli/main.py", line 723, in _prepare_deploy_operations
+    load_deploy_file(state, filename)
+  File "/tmp/scarfagnone/.venv/lib/python3.12/site-packages/pyinfra_cli/util.py", line 229, in load_deploy_file
+    _parallel_load_hosts(state, lambda: exec_file(filename), filename)
+  File "/tmp/scarfagnone/.venv/lib/python3.12/site-packages/pyinfra_cli/util.py", line 223, in _parallel_load_hosts
+    raise result
+  File "/tmp/scarfagnone/.venv/lib/python3.12/site-packages/pyinfra_cli/util.py", line 203, in load_file
+    callback()
+  File "/tmp/scarfagnone/.venv/lib/python3.12/site-packages/pyinfra_cli/util.py", line 229, in <lambda>
+    _parallel_load_hosts(state, lambda: exec_file(filename), filename)
+                                        ^^^^^^^^^^^^^^^^^^^
+  File "/tmp/scarfagnone/.venv/lib/python3.12/site-packages/pyinfra_cli/util.py", line 57, in exec_file
+    code = compile(code_str, filename, "exec")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "deploy.py", line 39
+    "curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n dest="+home/.local,
+                                                                                               ^
+SyntaxError: invalid syntax
