@@ -11,6 +11,7 @@ cd scarfagnone
 
 uv venv
 source .venv/bin/activate
+uv sync
 
 pyinfra @local deploy.py
 ```
