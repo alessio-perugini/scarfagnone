@@ -1,3 +1,4 @@
+import os
 from pyinfra import context, local
 from pyinfra.facts.files import Directory
 from pyinfra.facts.server import LinuxName, Which
@@ -59,7 +60,7 @@ def setup_common():
                 "curl -fsSL https://get.docker.com -o /tmp/get-docker.sh",
                 "sh /tmp/get-docker.sh",
                 "groupadd docker",
-                "usermod -aG docker alessioperugini",
+                "usermod -aG docker "+os.getlogin( ),
                 "systemctl enable docker.service",
                 "systemctl enable containerd.service",
                 "curl -fsSL https://github.com/docker/docker-credential-helpers/releases/download/v0.8.2/docker-credential-secretservice-v0.8.2.linux-amd64 -o /usr/local/bin/docker-credential-secretservice",
@@ -72,7 +73,7 @@ def setup_common():
     server.shell(
         name="Default shell to zsh",
         commands=[
-            "chsh -s $(which zsh) alessioperugini",
+            "chsh -s $(which zsh) "+os.getlogin( ),
         ],
         _sudo=True,
     )
