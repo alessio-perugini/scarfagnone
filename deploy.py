@@ -63,7 +63,7 @@ def setup_common():
                 "usermod -aG docker "+os.getlogin( ),
                 "systemctl enable docker.service",
                 "systemctl enable containerd.service",
-                "curl -fsSL https://github.com/docker/docker-credential-helpers/releases/download/v0.8.2/docker-credential-secretservice-v0.8.2.linux-amd64 -o /usr/local/bin/docker-credential-secretservice",
+                "curl -fsSL https://github.com/docker/docker-credential-helpers/releases/download/v0.9.5/docker-credential-secretservice-v0.9.5.linux-amd64 -o /usr/local/bin/docker-credential-secretservice",
                 "chmod +x /usr/local/bin/docker-credential-secretservice",
             ],
             _sudo=True,
