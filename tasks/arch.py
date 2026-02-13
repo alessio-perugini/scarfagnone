@@ -10,16 +10,27 @@ server.shell(
         "sudo pacman -S --needed --noconfirm git base-devel && "
         "git clone https://aur.archlinux.org/yay.git && "
         "cd yay && "
-        "makepkg -si --noconfirm; "
+        "makepkg -si --noconfirm && "
+        "cd .. && "
+        "rm -rf yay; "
         "fi"
     ],
 )
 
 # Install packages from AUR using yay
+aur_packages = [
+    "1password",
+    "1password-cli",
+    "brave-bin",
+    "visual-studio-code-bin",
+    "keybase-bin",
+    "rofimoji",
+]
+
 server.shell(
     name="Install AUR packages",
     commands=[
-        "yay -S --noconfirm --needed 1password 1password-cli brave-bin visual-studio-code-bin keybase-bin rofimoji"
+        f"yay -S --noconfirm --needed {' '.join(aur_packages)}"
     ],
 )
 
