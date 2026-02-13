@@ -105,5 +105,7 @@ if context.host.get_fact(LinuxName) == "Fedora":
     local.include("tasks/fedora.py")
 elif context.host.get_fact(LinuxName) == "Ubuntu":
     local.include("tasks/ubuntu.py")
+elif context.host.get_fact(LinuxName) == "Arch Linux":
+    local.include("tasks/arch.py")
 
 setup_common()
